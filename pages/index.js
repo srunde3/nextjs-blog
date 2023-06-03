@@ -4,6 +4,15 @@ import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
 
+export async function getStaticProps() { // function name is Next.js convention
+  const allPostsData = getSortedPostsData();
+  return { // returning a JSON structure
+    props: {  // props is a Next.js convention
+      allPostsData,
+    },
+  }; // semicolon here for the end of our JavaScript statement
+}
+
 export default function Home({ allPostsData }) {
   return (
     <Layout home>
@@ -29,13 +38,4 @@ export default function Home({ allPostsData }) {
       </section>
     </Layout>
   );
-}
-
-export async function getStaticProps() { // function name is Next.js convention
-  const allPostsData = getSortedPostsData();
-  return { // returning a JSON structure
-    props: {  // props is a Next.js convention
-      allPostsData,
-    },
-  }; // semicolon here for the end of our JavaScript statement
 }
